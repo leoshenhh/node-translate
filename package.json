@@ -1,0 +1,21 @@
+{
+  "name": "node-translate",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev src/main.ts"
+  },
+  "repository": "https://github.com/leoshenhh/node-translate.git",
+  "author": "Leo Shen <343206898@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^8.3.0",
+    "md5": "^2.3.0",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.1",
+    "@types/node": "^16.11.4",
+    "ts-node-dev": "^1.1.8"
+  }
+}
