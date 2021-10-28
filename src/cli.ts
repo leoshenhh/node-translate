@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as commander from "commander";
 import {translate} from "./main";
 

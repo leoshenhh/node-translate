@@ -1,17 +1,20 @@
 import {appid, appSecret} from "./private";
+import {IncomingMessage} from "http";
 
 const https = require('https');
 const querystring = require('querystring');
 const md5 = require('md5');
 
-const errorMap = {
+type ErrorMap = {
+    [key: string]: string
+}
+const errorMap:ErrorMap = {
     52001: '请求超时',
     52002: '系统错误',
-    52003: '未授权用户',
-    unknown: '服务器繁忙'
+    52003: '未授权用户'
 }
 
-export const translate = (q) => {
+export const translate = (q:string) => {
     const salt = Math.floor(Math.random() * 10000000000)
     const sign = md5(appid + q + salt + appSecret)
     let from,to;
@@ -23,7 +26,7 @@ export const translate = (q) => {
         to = 'en'
     }
 
-    const query: string = querystring.stringify({q, from, to, appid, salt, sign});
+    const query: string = querystring.stringify({q, from, to, appid: appid, salt, sign});
 
     const options = {
         hostname: 'api.fanyi.baidu.com',
@@ -32,8 +35,8 @@ export const translate = (q) => {
         method: 'GET'
     };
 
-    const request = https.request(options, (response) => {
-        const chunks = []
+    const request = https.request(options, (response:IncomingMessage) => {
+        const chunks:Buffer[] = []
         response.on('data', (chunk) => {
             chunks.push(chunk)
         });
@@ -68,7 +71,8 @@ export const translate = (q) => {
         })
     });
 
-    request.on('error', (e) => {
+    request.on('error', (e:Error) => {
+        console.log(e.constructor)
         console.error(e)
     });
     request.end();

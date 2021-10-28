@@ -1,7 +1,13 @@
 {
-  "name": "node-translate",
-  "version": "0.0.1",
-  "main": "index.js",
+  "name": "leo-translate",
+  "version": "0.0.2",
+  "main": "dist/main.js",
+  "bin": {
+    "fy": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*.js"
+  ],
   "scripts": {
     "start": "ts-node-dev src/main.ts"
   },
